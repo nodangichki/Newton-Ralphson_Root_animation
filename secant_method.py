@@ -27,21 +27,22 @@ import matplotlib.pyplot as plt
 
 x = Symbol('x')
 # user defined variables
-guess = 0.05
-guess_xi_min1 = 0.02
-iterations = 2
-expression = x ** 3 - 0.165 * x ** 2 + 0.000399  # x**2# #sin(x)
+guess = 3
+guess_xi_min1 = 2
+iterations = 11
+expression = -x**3-cos(x)#x ** 3 - 0.165 * x ** 2 + 0.000399#cos(x)#  # x**2# #sin(x)
 xmin = -10
 xmax = 10
-ymin = -2
-ymax = 2
-fine = 0.01
-speed_of_animation = 5
+ymin = -50
+ymax = 50
+fine = 0.1
+speed_of_animation = 0.1
 # script variables
 new_guess = 0
 previous_value = []
 x_values_per_itter = []
 y_values_per_itter = []
+errors = []
 length = int((xmax - xmin) / fine)
 
 for loops in range(0, iterations):
@@ -57,7 +58,7 @@ for loops in range(0, iterations):
     f_of_x = expression.subs(x, guess)
     f_of_xmin1 = expression.subs(x, guess_xi_min1)
     tempval3 = guess - ((f_of_x * (guess - guess_xi_min1)) / (f_of_x - f_of_xmin1))
-    new_guess = round(tempval3, 5)
+    new_guess = round(tempval3,9)
 
     x1 = guess
     y1 = expression.subs(x, guess)
@@ -71,7 +72,10 @@ for loops in range(0, iterations):
     y_values_per_itter.append(y_of_1)
 
     guess_xi_min1 = guess
+    err = abs(((new_guess - guess) / new_guess)) * 100
     guess = new_guess
+    errors.append(err)
+
     previous_value.append(guess)
 
     #    derivative_of_derivatives.append(subs)
@@ -81,9 +85,9 @@ axes.set_ylim(ymin, ymax)
 axes.set_xlim(xmin=xmin, xmax=xmax)
 
 for i in range(iterations):
-    print(f'Itteration NO.{i + 1} and root guessed is {previous_value[i]}')
+    print(f'Itteration NO.{i + 1} and root guessed is {round(previous_value[i],9)} err={errors[i]}%')
     axes.plot(t, function, color="blue")
     axes.plot(x_values_per_itter[i], y_values_per_itter[i], marker='o', color='red')
-    plt.pause(5)
+    plt.pause(speed_of_animation)
 
 plt.show()

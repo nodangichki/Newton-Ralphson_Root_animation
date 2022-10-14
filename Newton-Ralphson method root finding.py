@@ -30,7 +30,7 @@ import seaborn as sns
 x = Symbol('x')
 # user defined variables
 guess = 0.5
-iterations = 3
+iterations = 10
 expression = x ** 3 - 0.165 * x ** 2 + 0.000399  # sin(x) #x**2
 xmin = -10
 xmax = 10
@@ -42,8 +42,6 @@ speed_of_animation = 2
 new_guess = 0
 previous_value = []
 error_list = []
-function_of_functions = []
-derivative_of_derivatives = []
 tanlines_of_tanline = []
 time_of_times = []
 length = int((xmax-xmin)/fine)
@@ -60,7 +58,7 @@ for loops in range(0, iterations):                               # this for loop
     tempval1 = expression.subs(x, guess)
     tempval2 = derr.subs(x, guess)
     tempval3 = guess - (tempval1 / tempval2)
-    new_guess = round(tempval3,5)
+    new_guess = tempval3
     tanx1 = guess
     tany1 = expression.subs(x,guess)
     tanm = derr.subs(x,guess)
@@ -73,7 +71,6 @@ for loops in range(0, iterations):                               # this for loop
     previous_value.append(guess)
 
     #function_of_functions.append(function)
-    derivative_of_derivatives.append(subs)
     time_of_times.append(t)
     tanlines_of_tanline.append(tanline)
 fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(10, 5))
@@ -84,7 +81,7 @@ axes.autoscale(enable=None,tight=True,axis=y)
 #plt.style.use("ggplot")
 
 for i in range(iterations):
-    print(f'Itteration NO.{i + 1} and root guessed is {previous_value[i]} error is {round(error_list[i], 2)}%')
+    print(f'Itteration NO.{i + 1} and root guessed is {previous_value[i]} error is {error_list[i]}%')
     plt.minorticks_on()
     plt.tick_params(direction='in', right=True, top=True)
     plt.tick_params(labelsize=14)
@@ -94,7 +91,7 @@ for i in range(iterations):
     plt.tick_params(direction='in', which='major', length=10, bottom=True, top=True, left=True, right=True)
     plt.yticks(yticks)
 
-    axes.plot(time_of_times[i],tanlines_of_tanline[i],label=f'root is: {previous_value[i]} E= {round(error_list[i],1)}%',  color=colors[i])
+    axes.plot(time_of_times[i],tanlines_of_tanline[i],label=f'Root: {round(previous_value[i],4)} Err= {round(error_list[i],1)}%',  color=colors[i])
     plt.legend()
     plt.xlabel('Time', fontsize=14)
     plt.ylabel('Y-Values', fontsize=14)
