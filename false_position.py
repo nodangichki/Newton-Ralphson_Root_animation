@@ -1,12 +1,23 @@
+'''
+script help
+ user defined variables:
+   xu / xl => initial values for upper and lower bounds
+   iterations => maximum no of iterations to run
+   expression => function to find root of
+   error_break => set to true if you want to break the iterations if a certain error threshold is met
+   error_threshold => if error_break is true iterations will stop when this error percentage is met
+ !NOT TO CHANGE/SCRIPT VARIABLES!
+   previous_value, errors[100], X [DO NOT CHANGE THESE VALUES!]
+'''
 from sympy import *
 
 x = Symbol('x')  # from symbolic library define x as a symbol for substitution
-xu = 0.11
-xl = 0
-iterations = 6
-expression = x ** 3 - 0.165 * x ** 2 + 0.000399
-error_break = False   # should the program stop when error threshold is reached?
-error_threshold = 3  # error threshold (program will stop when error is <= this value
+xu = -15
+xl = -10
+iterations = 15000
+expression = x**3+3*x**2-1
+error_break = True   # should the program stop when error threshold is reached?
+error_threshold = 0  # error threshold (program will stop when error is <= this value
 previous_value = []
 errors = [100]
 

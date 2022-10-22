@@ -27,10 +27,10 @@ import matplotlib.pyplot as plt
 
 x = Symbol('x')
 # user defined variables
-guess = 3
-guess_xi_min1 = 2
+guess = -2
+guess_xi_min1 = -3
 iterations = 11
-expression = -x**3-cos(x)#x ** 3 - 0.165 * x ** 2 + 0.000399#cos(x)#  # x**2# #sin(x)
+expression = x**3+3*x**2-1#-x**3-cos(x)#x ** 3 - 0.165 * x ** 2 + 0.000399#cos(x)#  # x**2# #sin(x)
 xmin = -10
 xmax = 10
 ymin = -50
